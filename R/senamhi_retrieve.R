@@ -24,6 +24,12 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   highchart_script <- XML::getNodeSet(aqs_highchart_html, "//script")[[3]]
   highchart_script_text <- utils::capture.output(highchart_script)
 
+  # Getting AQS name
+  aqs_text <- highchart_script_text[8]
+  aqs_name <- unlist(strsplit(aqs_text, "text: "))[2]
+  aqs_name <- gsub("\r", "", aqs_name)
+  aqs_name <- unlist(strsplit(aqs_name, ": "))[-1]
+
   # Getting the dates
   date_text <- highchart_script_text[14]
 
@@ -74,7 +80,7 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   complete_df <- merge(all_dates, aqs_df, all = TRUE)
 
   # Adding aqs name
-  complete_df$aqs <- senamhi_aqs$aqs[senamhi_aqs$code == aqs_code]
+  complete_df$aqs <- aqs_name
 
   # A better pol column name
   pol_col_name <- tolower(gsub("N_", "", pol_code))
