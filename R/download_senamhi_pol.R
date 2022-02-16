@@ -35,5 +35,9 @@ download_senamhi_pol <- function(aqs_codes, pol_codes, start_date, end_date,
     aqs_data <- do.call(rbind, aqs_data)
   }
 
+  if (length(aqs_data) == 1){
+    aqs_data <- aqs_data[[1]]
+  }
+
   return(aqs_data)
 }
