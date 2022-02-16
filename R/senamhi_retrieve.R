@@ -28,6 +28,7 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   aqs_text <- highchart_script_text[8]
   aqs_name <- unlist(strsplit(aqs_text, "text: "))[2]
   aqs_name <- gsub("\r", "", aqs_name)
+  aqs_name <- gsub("'", "", aqs_name)
   aqs_name <- unlist(strsplit(aqs_name, ": "))[-1]
 
   # Getting the dates
