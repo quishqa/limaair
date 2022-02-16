@@ -49,5 +49,18 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
     )
   }
 
-  return(aqs_df)
+  # Completing missing dates with NA
+  all_dates <- data.frame(
+    date = seq(as.POSIXct(strptime(paste0(start_date, "_00:00"),
+                                   format="%d/%m/%Y_%H:%M"),
+                          tz="America/Lima"),
+               as.POSIXct(strptime(paste0(end_date, "_23:00"),
+                                   format="%d/%m/%Y_%H:%M"),
+                          tz = "America/Lima"),
+               by = "hour")
+  )
+
+  complete_df <- merge(all_dates, aqs_df, all = TRUE)
+
+  return(complete_df)
 }
