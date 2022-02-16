@@ -66,8 +66,8 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   complete_df$aqs <- senamhi_aqs$aqs[senamhi_aqs$code == aqs_code]
 
   # A better pol column name
-  pol_col_name <- to_lower(gsub("N_", "", pol_code))
-  colnames(complet_df)[2] <- pol_col_name
+  pol_col_name <- tolower(gsub("N_", "", pol_code))
+  colnames(complete_df)[2] <- pol_col_name
 
   return(complete_df)
 }
