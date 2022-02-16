@@ -61,6 +61,6 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   )
 
   complete_df <- merge(all_dates, aqs_df, all = TRUE)
-
+  complete_df$aqs <- senamhi_aqs$aqs[senamhi_aqs$code == aqs_code]
   return(complete_df)
 }
