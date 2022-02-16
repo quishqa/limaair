@@ -5,8 +5,8 @@ Authors@R:
     person("Mario", "Gavidia-Calderón", , "mario.calderon@iag.usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package download air quality from SENMAHI air quality network
-from Lima, Peru. Multiple pollutant from multiple air quality station can be 
-download. A complete dataset is returned ready for data analysis.
+  from Lima, Peru. Multiple pollutant from multiple air quality station can be 
+  download. A complete dataset is returned ready for data analysis.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

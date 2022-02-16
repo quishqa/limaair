@@ -1,3 +1,14 @@
+#' Internal function - Download pollutant data from one air quality station
+#'
+#' @param aqs_code Air quality station code.
+#' @param pol_code Pollutant code.
+#' @param start_date Date to start downloading in dd/mm/yyyy.
+#' @param end_date Date to end downloading in dd/mm/yyyy.
+#'
+#' @return data.frame with the selected pollutant and air quality station
+#' @noRd
+#' @keywords internal
+
 senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   url <- paste0("https://www.senamhi.gob.pe/",
                 "site/sea/www/site/sea/graficas/dato_hora.php")
