@@ -15,7 +15,7 @@
 export_to_csv <- function(aqs_codes, pol_codes, start_date, end_date,
                           to_df, csv_path, aqs_data){
   if (csv_path == ""){
-    csv_path <- getwd()
+    csv_path <- paste0(getwd(), "/")
   }
 
   if (to_df) {
