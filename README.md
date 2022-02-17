@@ -84,12 +84,44 @@ cm_pm25 <- download_senamhi_pol(aqs_codes = cm_sb_code,
 Voilà! In this case `download_senamhi_pol`returns a **`list`** with two data frames (one for each station). Each data frame has a column for each pollutant. If you prefer one **`data.frame`**  returned instead of a list (i.e. both data frames combined by row), you can just use **`to_df = TRUE`** argument:
 
 ```R
+cm_sb_code <- c(112194, 112193)
+pm_code <- c("N_PM25", "N_PM10")
+start_date <- "01/01/2022"
+end_date <- "07/01/2022"
+
 cm_pm25 <- download_senamhi_pol(aqs_codes = cm_sb_code,
                                 pol_codes = pm_code,
                                 start_date = start_date,
                                 end_date = end_date,
                                 to_df = TRUE) # Look here!
 ```
+
+### Exporting to csv
+If you prefer to process the data in another software,
+you can export the downloaded data to a csv.
+You just need to add the `to_csv` and `csv_path` arguments in `download_senamhi_pol` function.
+If `to_df = TRUE`, then it will write a csv with the following name convention `{aqs_code1}_{aqs_code2}...{aqs_codeN}-{pol_code1}...{pol_codeN}-{start_date}-{end_date}.csv`
+
+If `to_df = FALSE`, then it will create a csv for each station with the followingname convention `{aqs_code1-{pol_code1}...{pol_codeN}-{start_date}-{end_date}.csv`.
+
+If `csv_path = ""` (the default value) then the csv will be saved in the working directory.
+
+```R
+cm_sb_code <- c(112194, 112193)
+pm_code <- c("N_PM25", "N_PM10")
+start_date <- "01/01/2022"
+end_date <- "07/01/2022"
+
+cm_pm25 <- download_senamhi_pol(aqs_codes = cm_sb_code,
+                                pol_codes = pm_code,
+                                start_date = start_date,
+                                end_date = end_date,
+                                to_df = TRUE,
+                                to_csv = TRUE,
+                                csv_path = "~/")
+```
+
+It will create the `112194_112193-N_PM25_N_PM10-01012022-07012022.csv` in the home directory.
 
 # Caveat Emptor
 According to SENAMHI, the data displayed in their site is **not validated data**, so you need to be careful and perform a data quality control methodology. You can do it!
