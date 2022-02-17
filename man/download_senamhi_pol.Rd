@@ -4,7 +4,14 @@
 \alias{download_senamhi_pol}
 \title{Download pollutant data from SENAMHI air quality stations.}
 \usage{
-download_senamhi_pol(aqs_codes, pol_codes, start_date, end_date, to_df = FALSE)
+download_senamhi_pol(
+  aqs_codes,
+  pol_codes,
+  start_date,
+  end_date,
+  to_df = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{aqs_codes}{A vector with station codes. See senamhi_aqs().}
@@ -15,7 +22,9 @@ download_senamhi_pol(aqs_codes, pol_codes, start_date, end_date, to_df = FALSE)
 
 \item{end_date}{Date to end downloading in dd/mm/yyyy.}
 
-\item{to_df}{Returns a data.frame}
+\item{to_df}{Returns a data.frame. FALSE by default.}
+
+\item{verbose}{Print query summary. TRUE by default.}
 }
 \value{
 list where each element is an air quality station data

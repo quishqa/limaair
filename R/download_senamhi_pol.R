@@ -9,7 +9,8 @@
 #' @param pol_codes A vector with pollutants codes. See senamhi_params().
 #' @param start_date Date to start downloading in dd/mm/yyyy.
 #' @param end_date Date to end downloading in dd/mm/yyyy.
-#' @param to_df Returns a data.frame
+#' @param to_df Returns a data.frame. FALSE by default.
+#' @param verbose Print query summary. TRUE by default.
 #'
 #' @return list where each element is an air quality station data
 #' @export
@@ -26,7 +27,15 @@
 #' pm_data <- download_senamhi_data(aqs_code, pol_codes, start_date, end_date)
 #' }
 download_senamhi_pol <- function(aqs_codes, pol_codes, start_date, end_date,
-                                 to_df = FALSE){
+                                 to_df = FALSE, verbose = TRUE){
+
+  if (verbose){
+    message("Your query is:")
+    message("Pollutant: ", paste(pol_codes, collapse = ", "))
+    message("Air quality stations: ", paste(aqs_codes, collapse = ", "))
+    message("From ", start_date, " to ", end_date)
+  }
+
   aqs_data <- lapply(aqs_codes, get_pols_from_aqs,
                      pol_codes = pol_codes,
                      start_date = start_date,
