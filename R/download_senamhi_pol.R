@@ -10,6 +10,8 @@
 #' @param start_date Date to start downloading in dd/mm/yyyy.
 #' @param end_date Date to end downloading in dd/mm/yyyy.
 #' @param to_df Returns a data.frame. FALSE by default.
+#' @param to_csv Export data to csv file. FALSE by default.
+#' @param csv_path Location to export csv.
 #' @param verbose Print query summary. TRUE by default.
 #'
 #' @return list where each element is an air quality station data
@@ -27,8 +29,9 @@
 #' pm_data <- download_senamhi_data(aqs_code, pol_codes, start_date, end_date)
 #' }
 download_senamhi_pol <- function(aqs_codes, pol_codes, start_date, end_date,
-                                 to_df = FALSE, verbose = TRUE){
-
+                                 to_df = FALSE, to_csv=FALSE, csv_path = "",
+                                 verbose = TRUE){
+  # Showing query summary
   if (verbose){
     message("Your query is:")
     message("Pollutant: ", paste(pol_codes, collapse = ", "))
@@ -36,16 +39,24 @@ download_senamhi_pol <- function(aqs_codes, pol_codes, start_date, end_date,
     message("From ", start_date, " to ", end_date)
   }
 
+  # Downloading data
   aqs_data <- lapply(aqs_codes, get_pols_from_aqs,
                      pol_codes = pol_codes,
                      start_date = start_date,
                      end_date = end_date)
+  # As data.frame
   if (to_df){
     aqs_data <- do.call(rbind, aqs_data)
   }
 
   if (length(aqs_data) == 1){
     aqs_data <- aqs_data[[1]]
+  }
+
+  # To csv
+  if (to_csv){
+    export_to_csv(aqs_codes, pol_codes, start_date, end_date,
+                  to_df, csv_path, aqs_data)
   }
 
   return(aqs_data)

@@ -10,6 +10,8 @@ download_senamhi_pol(
   start_date,
   end_date,
   to_df = FALSE,
+  to_csv = FALSE,
+  csv_path = "",
   verbose = TRUE
 )
 }
@@ -23,6 +25,10 @@ download_senamhi_pol(
 \item{end_date}{Date to end downloading in dd/mm/yyyy.}
 
 \item{to_df}{Returns a data.frame. FALSE by default.}
+
+\item{to_csv}{Export data to csv file. FALSE by default.}
+
+\item{csv_path}{Location to export csv.}
 
 \item{verbose}{Print query summary. TRUE by default.}
 }
