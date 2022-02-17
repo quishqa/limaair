@@ -51,6 +51,7 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   pol_data <- gsub("\\[", "", pol_data)
   pol_data <- gsub(",]\r", "", pol_data)
   pol_data <- unlist(strsplit(pol_data, ","))
+  pol_data[pol_data == "null"] <- NA
 
   # Building data.frame
   if (length(date_data) != length(pol_data)){
@@ -66,6 +67,11 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
       pol = as.numeric(pol_data)
     )
   }
+
+  # Removing not hourly data
+  aqs_df$date <- as.POSIXlt(aqs_df$date)
+  aqs_df <- aqs_df[aqs_df$date$min == 0, ]
+  aqs_df$date <- as.POSIXct(aqs_df$date)
 
   # Completing missing dates with NA
   all_dates <- data.frame(
