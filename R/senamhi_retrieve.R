@@ -62,7 +62,7 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
     aqs_df <- data.frame(
       date = as.POSIXct(
         strptime(date_data, format = "%d/%m/%Y%H:%M:"),
-        tz = "America/Lima"
+        tz = "UTC"
       ),
       pol = as.numeric(pol_data)
     )
@@ -77,10 +77,10 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
   all_dates <- data.frame(
     date = seq(as.POSIXct(strptime(paste0(start_date, "_00:00"),
                                    format="%d/%m/%Y_%H:%M"),
-                          tz="America/Lima"),
+                          tz = "UTC"),
                as.POSIXct(strptime(paste0(end_date, "_23:00"),
                                    format="%d/%m/%Y_%H:%M"),
-                          tz = "America/Lima"),
+                          tz = "UTC"),
                by = "hour")
   )
 
