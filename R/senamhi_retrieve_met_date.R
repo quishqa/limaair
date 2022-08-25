@@ -13,7 +13,11 @@ senamhi_retrieve_met_date <- function(start_date, end_date, aqs_code){
   met_df <- met_df[c("date", names(met_df)[3:7])]
   met_df[, 2:6] <- sapply(met_df[, 2:6], as.numeric)
 
-  # TODO: Pad out missing hours with NA
+  all_dates_hour <- data.frame(
+    date = seq(met_df$date[1], met_df$date[nrow(met_df)], by = "hour")
+  )
 
-  return(met_df)
+  met_df_complete <- merge(all_dates_hour, met_df, all = T)
+
+  return(met_df_complete)
 }
