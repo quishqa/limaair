@@ -15,9 +15,17 @@ senamhi_retrieve_met <- function(year_month, aqs_code){
   aqs_table_html_table <- XML::getNodeSet(aqs_table_html, "//table")
   data <- XML::readHTMLTable(aqs_table_html_table[[2]])
 
+  date <- as.POSIXct(strptime(paste0(year_month, "01"), format = "%Y%m%d"))
+  date_months <- seq(date, length.out = 2, by = "month")
+  days <- as.numeric(as.Date(date_months[2]) - as.Date(date_months[1]))
+  all_dates <- seq(date, length.out = days * 24, by = "hour")
+  day <- format(all_dates, "%Y/%m/%d")
+  hour <- format(all_dates, "%H:%M")
+
   if (is.null(data)){
+    message("No data available, padding out with NA")
     data <- data.frame(
-      day = NA, hour = NA, tc = NA, prec = NA, rh = NA, wd = NA, ws = NA
+      day = day, hour = hour, tc = NA, prec = NA, rh = NA, wd = NA, ws = NA
     )
   }
 
