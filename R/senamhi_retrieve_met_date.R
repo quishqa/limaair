@@ -11,7 +11,8 @@ senamhi_retrieve_met_date <- function(start_date, end_date, aqs_code){
   met_df$date <- paste(met_df$day, met_df$hour, sep = "_")
   met_df$date <- as.POSIXct(strptime(met_df$date, format = "%Y/%m/%d_%H:%M"))
   met_df <- met_df[c("date", names(met_df)[3:7])]
-  # TODO: Change column type
+  met_df[, 2:6] <- sapply(met_df[, 2:6], as.numeric)
+
   # TODO: Pad out missing hours with NA
 
   return(met_df)
