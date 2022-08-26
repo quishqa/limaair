@@ -14,6 +14,22 @@ senamhi_aqs <- data.frame(
           -77.03364, -76.92706)
 )
 
+senamhi_aws <- data.frame(
+  aqs = c("Antonio Raimondi", "Nana", "Von Humboldt",
+          "Campo de marte"),
+  code = c("472A218A", 111290, "472AC278", 112181),
+  lat = c(-(11 + (46 + 33.80 / 60) / 60),
+          -(11 + (59 + 14.94 / 60) / 60),
+          -(12 + (4. + 55.95 / 60) / 60),
+          -12.07054),
+  lon = c(-(77 + (46 + 33.80 / 60) / 60),
+          -(76 + (50 + 30.94 / 60) / 60),
+          -(76 + (56 + 21.98 / 60) / 60),
+          -77.04322)
+)
+# Campo de Marte meteorological station has a different code
+senamhi_aws <- rbind(senamhi_aws, senamhi_aqs[-1,])
+
 senamhi_params <- data.frame(
   code = c("N_PM10", "N_PM25", "N_SO2",
            "N_NO2", "N_O3", "N_CO"),
@@ -23,4 +39,5 @@ senamhi_params <- data.frame(
   units = rep("ug/m3", 6)
 )
 
-usethis::use_data(senamhi_aqs, senamhi_params, overwrite = TRUE)
+usethis::use_data(senamhi_aqs, senamhi_aws,
+                  senamhi_params, overwrite = TRUE)

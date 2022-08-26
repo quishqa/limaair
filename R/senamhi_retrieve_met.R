@@ -1,9 +1,19 @@
-senamhi_retrieve_met <- function(year_month, aqs_code){
+#' Internal function - Download meteorological data from one automatic weather
+#'  station for one month
+#'
+#' @param year_month Date to download in %Y%m format.
+#' @param aws_code Automatic weather station (AWS) code.
+#'
+#' @return data.frame with one month of hourly data of temperature, precipitation,
+#' relative humidity, wind speed and direction from one AWS
+#' @noRd
+#' @keywords internal
+senamhi_retrieve_met <- function(year_month, aws_code){
   url <- paste0("https://www.senamhi.gob.pe/servicios/maps/mapa-estaciones/",
                 "_dato_esta_tipo02.php")
   aqs_table <- httr::GET(url,
                          query=list(
-                           estaciones = aqs_code,
+                           estaciones = aws_code,
                            CBOFiltro = year_month,
                            t_e = "M",
                            estado = "AUTOMATICA",
