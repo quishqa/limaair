@@ -18,6 +18,7 @@ senamhi_retrieve_met_date <- function(start_date, end_date, aqs_code){
   )
 
   met_df_complete <- merge(all_dates_hour, met_df, all = T)
+  met_df_complete$aqs <- aqs_code
 
   return(met_df_complete)
 }
