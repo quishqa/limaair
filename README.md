@@ -1,4 +1,7 @@
 # limaair
+ <!-- badges: start -->
+  [![R-CMD-check](https://github.com/quishqa/limaair/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/quishqa/limaair/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 This package downloads pollutant data from the [SENAMHI air quality network](https://www.senamhi.gob.pe/?p=calidad-del-aire), meteorological data from [SENAMHI automatic weather staions](https://www.senamhi.gob.pe/servicios/?p=estaciones), and  sounding data from [Jorge Chávez airport](https://en.wikipedia.org/wiki/Jorge_Ch%C3%A1vez_International_Airport) located in Lima, capital of Peru.
 The returned `data.frame` is a complete dataset.
