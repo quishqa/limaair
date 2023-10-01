@@ -20,6 +20,7 @@ senamhi_retrieve <- function(aqs_code, pol_code, start_date, end_date){
                                f1 = start_date,
                                f2 = end_date
                              ))
+  aqs_highchart <- httr::content(aqs_highchart)
   aqs_highchart_html <- XML::htmlParse(aqs_highchart)
   highchart_script <- XML::getNodeSet(aqs_highchart_html, "//script")[[3]]
   highchart_script_text <- utils::capture.output(highchart_script)
